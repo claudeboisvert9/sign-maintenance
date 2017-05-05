@@ -5,6 +5,10 @@
  */
 package signmaintenance;
 
+import java.util.ArrayList;
+import java.util.Date;
+import javafx.scene.control.DatePicker;
+
 /**
  *
  * @author User
@@ -14,19 +18,20 @@ public class CitySign {
     String latitude;
     String longitude;
     String type;
+    String timeFrom;
+    String timeTo;
+    String maxTime;
+    boolean[] days = new boolean[7]; // Monday to Sunday
     String dateFrom;
     String dateTo;
-    //String[] days;
-    //String[] times;
-    String days;
-    String times;
 
     PictureFile pf = new PictureFile();
-/*
+
+    /*
     public void CitySign() {
        pf = new PictureFile();
     }
-*/   
+     */
     public void settype(String type) {
         this.type = type;
     }
@@ -34,7 +39,7 @@ public class CitySign {
     public String gettype() {
         return type;
     }
-    
+
     public void setlatitude(String latitude) {
         this.latitude = latitude;
     }
@@ -42,7 +47,7 @@ public class CitySign {
     public String getlatitude() {
         return latitude;
     }
-      
+
     public void setlongitude(String longitude) {
         this.longitude = longitude;
     }
@@ -50,5 +55,5 @@ public class CitySign {
     public String getlongitude() {
         return longitude;
     }
-    
+
 }

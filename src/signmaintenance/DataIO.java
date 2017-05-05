@@ -45,9 +45,22 @@ public class DataIO {
     public String latitude;
     public String longitude;
 
+    public static final int iMonday = 0;
+    
+    
+    public enum Day {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    }
+
+    public enum Month {
+        JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+        JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    }
+
     public void DataIO() {
-        // Constructeur
-        getImgFiles(); //files to process
+        // Constructeur        
+        //getImgFiles(); //files to process
+        // if (nbFiles > 1) { openDB(); }
     }
 
     public static void openDB() {
@@ -173,12 +186,23 @@ public class DataIO {
         return sign;
     }
 
-    public void saveToMongo() {
+    public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
-        Document doc = new Document("name", "SaveToMongo")
-                .append("type", "test")
-                .append("count", 2)
-                .append("info", new Document("x", 199).append("y", 200));
+
+        Document doc = new Document("Key", fileNumber + "_" + latitude + "_" + longitude)
+                .append("signType", sign.type)
+                .append("timeFrom", sign.timeFrom)
+                .append("timeTo", sign.timeTo)
+                .append("maxTime", sign.maxTime)               
+                .append("days", new Document("monday", sign.days[iMonday])
+                        .append("tuesday", sign.days[1])
+                        .append("wednesday", sign.days[2])
+                        .append("thursday", sign.days[3])
+                        .append("friday", sign.days[4])
+                        .append("saturday", sign.days[5])
+                        .append("sunday", sign.days[6]))
+                .append("dateFrom", sign.dateFrom)
+                .append("dateTo", sign.dateTo);
         collection.insertOne(doc);
     }
 }

@@ -17,6 +17,7 @@ public class CitySign {
 
     String latitude;
     String longitude;
+    String city;
     String type;
     String timeFrom;
     String timeTo;

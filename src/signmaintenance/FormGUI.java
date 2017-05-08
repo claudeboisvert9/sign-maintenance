@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -26,12 +27,12 @@ public class FormGUI extends javax.swing.JFrame {
     public DataIO io;
     public static File[] dirFiles;
     public CitySign sign;
-    //JLabel imageLblCopy = null;
 
     // Set data directories to processC:\Users\User\Pictures\Parking Signs\Test\images
-    private static final String REL_PATH_TEXT = "C:\\Users\\User\\Pictures\\Parking Signs\\Test";
-    String imgRelPathText = REL_PATH_TEXT + "\\images";
-    String locRelPathText = REL_PATH_TEXT + "\\location";
+    //private static final String REL_PATH_TEXT = "C:\\Users\\User\\Pictures\\Parking Signs\\Test";
+    String dataSourceAbsPath;
+    String imagesAbsPath;
+    String locationsAbsPath = dataSourceAbsPath;
 
     // Form data fields
     public static String fileName, fileNo, lati, longi;
@@ -44,7 +45,12 @@ public class FormGUI extends javax.swing.JFrame {
 
         io = new DataIO();
         dirFiles = io.getImgFiles(); //file list
-        if (dirFiles.length > 0) { io.openDB(); } //files selected
+        dataSourceAbsPath = io.getDataSourcePath();
+        imagesAbsPath = dataSourceAbsPath + "\\images";
+        locationsAbsPath = dataSourceAbsPath + "\\location";
+        if (dirFiles.length > 0) {
+            io.openDB();
+        } //files selected
         nextBtn.doClick();
     }
 
@@ -159,12 +165,12 @@ public class FormGUI extends javax.swing.JFrame {
 
         timeToLbl.setText("To:");
 
-        signTypeCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Parking", "Parking Allowed" }));
+        signTypeCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Parking Time", "No Parking Always", "Parking Time", "Parking Always" }));
         signTypeCBox.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 signTypeCBoxCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -271,10 +277,10 @@ public class FormGUI extends javax.swing.JFrame {
             }
         });
         timeFromPicker.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 timeFromPickerCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         timeFromPicker.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -284,10 +290,10 @@ public class FormGUI extends javax.swing.JFrame {
         });
 
         timeToPicker.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 timeToPickerCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -448,8 +454,8 @@ public class FormGUI extends javax.swing.JFrame {
 
         sign = io.getImageInfo(curImgFileName);
         //resize image
-        String inputImagePath = imgRelPathText + "\\" + curImgFileName;
-        String outputImagePath = REL_PATH_TEXT + "\\" + "resizeTemp.jpg";
+        String inputImagePath = imagesAbsPath + "\\" + curImgFileName;
+        String outputImagePath = dataSourceAbsPath + "\\" + "resizeTemp.jpg";
         try {
             double percent = 0.2;
             ImageResizer.resize(inputImagePath, outputImagePath, percent);
@@ -466,6 +472,8 @@ public class FormGUI extends javax.swing.JFrame {
         picNoTField.setText(sign.pf.fileNo);
         latitudeTField.setText(sign.latitude);
         longitudeTField.setText(sign.longitude);
+        // check if exist in mongo
+        //io.getMongoDoc(sign);
         // update regular screen fields
     }
 
@@ -491,15 +499,15 @@ public class FormGUI extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // validate fields
-        
-        // set sign data
+
+        // set Sign data
         sign.type = signTypeCBox.getSelectedItem().toString(); //set default value
         sign.timeFrom = timeFromPicker.getTimeStringOrEmptyString();
         sign.timeTo = timeToPicker.getTimeStringOrEmptyString();
         sign.maxTime = maxTimePicker.getTimeStringOrEmptyString();
         sign.dateFrom = dateFromPicker.getDateStringOrEmptyString();
         sign.dateTo = dateToPicker.getDateStringOrEmptyString();
-        
+
         // Save mongo document
         io.saveToMongo(sign);
     }//GEN-LAST:event_saveBtnActionPerformed

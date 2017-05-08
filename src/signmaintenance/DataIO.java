@@ -8,12 +8,20 @@ package signmaintenance;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.Block;
+
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.*;
+import com.mongodb.client.result.DeleteResult;
+import static com.mongodb.client.model.Updates.*;
+import com.mongodb.client.result.UpdateResult;
+import java.util.ArrayList;
+import java.util.List;
+
 import java.awt.image.BufferedImage;
 
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -28,9 +36,9 @@ import javax.swing.*;
  */
 public class DataIO {
 
-    private static final String REL_PATH_TEXT = "C:\\Users\\User\\Pictures\\Parking Signs\\Test";
-    private static String imgRelPathText;
-    private static String locRelPathText;
+    private static String dataSourceAbsPath = null; //user selectable
+    private static String imagesAbsPath;
+    private static String locationsAbsPath;
 
     public static MongoClient mongoClient;
     public static MongoDatabase database;
@@ -45,13 +53,10 @@ public class DataIO {
     public String latitude;
     public String longitude;
 
-    public static final int iMonday = 0;
-    
-    
-    public enum Day {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    }
-
+    //public static final int iMonday = 0;
+//    public enum Day {
+//        SUNDAY(0), MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6)
+//    }
     public enum Month {
         JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
         JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
@@ -80,14 +85,37 @@ public class DataIO {
         mongoClient.close();
     }
 
+    public void selectSourceDir() {
+        dataSourceAbsPath = null;
+        imagesAbsPath = null;
+        locationsAbsPath = null;
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("C:\\Users\\User\\Pictures\\Parking Signs"));
+        chooser.setDialogTitle("Select Source Directory");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+           System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+           System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+            dataSourceAbsPath = chooser.getSelectedFile().toString();
+            imagesAbsPath = dataSourceAbsPath + "\\images";
+            locationsAbsPath = dataSourceAbsPath + "\\location";
+  
+        } else {
+            System.out.println("No Selection ");
+        }
+    }
+
     public File[] getImgFiles() {
 
         // Set data directories to process
-        imgRelPathText = REL_PATH_TEXT + "\\images";
-        locRelPathText = REL_PATH_TEXT + "\\location";
-
-        File path = new File(imgRelPathText);
-        File[] files = path.listFiles();
+        //imgRelPathText = REL_PATH_TEXT + "\\images";
+        //locRelPathText = REL_PATH_TEXT + "\\location";
+        selectSourceDir();
+        File path = new File(imagesAbsPath);
+        files = path.listFiles();
         nbFiles = files.length;
         fileIndex = -1;
         return files;
@@ -121,7 +149,7 @@ public class DataIO {
     public BufferedImage getSignImage(String srcImgFileName) {
         BufferedImage image = null;
         try {
-            File image2 = new File(imgRelPathText + "\\" + srcImgFileName);
+            File image2 = new File(imagesAbsPath + "\\" + srcImgFileName);
             image = ImageIO.read(image2);
         } catch (IOException e) {
             e.printStackTrace();
@@ -150,7 +178,7 @@ public class DataIO {
         String locationFileName = "signLocation";
         fileNumber = srcImgFileName.replaceAll("\\D+", "");
         locationFileName = locationFileName + fileNumber;
-        String locationFilePath = locRelPathText + "\\" + locationFileName;
+        String locationFilePath = locationsAbsPath + "\\" + locationFileName;
         File locationFile = new File(locationFilePath);
 
         List<String> records = new ArrayList<String>(); // file content
@@ -186,23 +214,38 @@ public class DataIO {
         return sign;
     }
 
+    public void getMongoDoc(CitySign sign) {
+        MongoCollection<Document> collection = database.getCollection("signs");
+        
+        String docKey = fileNumber + "_" + latitude + "_" + longitude;
+        Document myDoc = collection.find(eq("Key", docKey)).first();
+        System.out.println(myDoc.toJson());
+        sign.type = myDoc.getString("signType");
+        //return sign;
+    }
+
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
-
+        
         Document doc = new Document("Key", fileNumber + "_" + latitude + "_" + longitude)
+                .append("city", sign.city)
                 .append("signType", sign.type)
                 .append("timeFrom", sign.timeFrom)
                 .append("timeTo", sign.timeTo)
-                .append("maxTime", sign.maxTime)               
-                .append("days", new Document("monday", sign.days[iMonday])
-                        .append("tuesday", sign.days[1])
-                        .append("wednesday", sign.days[2])
-                        .append("thursday", sign.days[3])
-                        .append("friday", sign.days[4])
-                        .append("saturday", sign.days[5])
-                        .append("sunday", sign.days[6]))
+                .append("maxTime", sign.maxTime)
+                .append("days", new Document("sunday", sign.days[0]))
+                .append("monday", sign.days[1])
+                .append("tuesday", sign.days[2])
+                .append("wednesday", sign.days[3])
+                .append("thursday", sign.days[4])
+                .append("friday", sign.days[5])
+                .append("saturday", sign.days[6])
                 .append("dateFrom", sign.dateFrom)
                 .append("dateTo", sign.dateTo);
         collection.insertOne(doc);
+    }
+    
+    public String getDataSourcePath() {
+        return dataSourceAbsPath;
     }
 }

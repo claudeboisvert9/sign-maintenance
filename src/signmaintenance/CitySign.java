@@ -19,6 +19,8 @@ public class CitySign {
     String longitude;
     String city;
     String type;
+    boolean typeAlways;
+    boolean typeDirection;
     String timeFrom;
     String timeTo;
     String maxTime;

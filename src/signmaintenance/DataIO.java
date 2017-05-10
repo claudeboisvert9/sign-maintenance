@@ -5,10 +5,13 @@
  */
 package signmaintenance;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.Block;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.*;
@@ -97,12 +100,12 @@ public class DataIO {
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-           System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
-           System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+            System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+            System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
             dataSourceAbsPath = chooser.getSelectedFile().toString();
             imagesAbsPath = dataSourceAbsPath + "\\images";
             locationsAbsPath = dataSourceAbsPath + "\\location";
-  
+
         } else {
             System.out.println("No Selection ");
         }
@@ -135,8 +138,9 @@ public class DataIO {
     }
 
     public String getNextImg(File[] dirFiles) {
-
-        fileIndex = fileIndex + 1;
+        if (fileIndex < dirFiles.length) { // last file
+            fileIndex += 1;
+        }
         for (int i = fileIndex; i < nbFiles; i++) {
             if (dirFiles[i].isFile()) { //this line weeds out other directories/folders
                 fileIndex = i;
@@ -207,6 +211,7 @@ public class DataIO {
         sign.setlatitude(latitude);
         sign.setlongitude(longitude);
 
+        //getMongoDoc();
         // si type not null set type previous type
         // set default fields or set to empty
         // Close fileS
@@ -214,37 +219,60 @@ public class DataIO {
         return sign;
     }
 
-    public void getMongoDoc(CitySign sign) {
+    public boolean getMongoDoc(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
-        
+
         String docKey = fileNumber + "_" + latitude + "_" + longitude;
         Document myDoc = collection.find(eq("Key", docKey)).first();
-        System.out.println(myDoc.toJson());
-        sign.type = myDoc.getString("signType");
-        //return sign;
+
+        if (myDoc != null) {
+            //use sign.setFieldname()?
+            System.out.println(myDoc.toJson());
+            sign.type = myDoc.getString("signType");
+            sign.typeAlways = myDoc.getBoolean("typeAlways");
+            sign.typeDirection = myDoc.getBoolean("typeDirection");
+            sign.city = myDoc.getString("city");
+            Document daysDoc = (Document) myDoc.get("days");
+            sign.days[0] = daysDoc.getBoolean("sunday");
+            sign.days[1] = daysDoc.getBoolean("monday");
+            sign.days[2] = daysDoc.getBoolean("tuesday");
+            sign.days[3] = daysDoc.getBoolean("wednesday");
+            sign.days[4] = daysDoc.getBoolean("thursday");
+            sign.days[5] = daysDoc.getBoolean("friday");
+            sign.days[6] = daysDoc.getBoolean("saturday");           
+            sign.timeFrom = myDoc.getString("timeFrom");
+            sign.timeTo = myDoc.getString("timeTo");
+            sign.maxTime = myDoc.getString("maxTime");
+            sign.dateFrom = myDoc.getString("dateFrom");
+            sign.dateTo = myDoc.getString("dateTo");
+            return true;
+        }
+        return false;
     }
 
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
-        
+
         Document doc = new Document("Key", fileNumber + "_" + latitude + "_" + longitude)
-                .append("city", sign.city)
                 .append("signType", sign.type)
+                .append("city", sign.city)
+                .append("typeAlways", sign.typeAlways)
+                .append("typeDirection", sign.typeDirection)
                 .append("timeFrom", sign.timeFrom)
                 .append("timeTo", sign.timeTo)
                 .append("maxTime", sign.maxTime)
-                .append("days", new Document("sunday", sign.days[0]))
-                .append("monday", sign.days[1])
-                .append("tuesday", sign.days[2])
-                .append("wednesday", sign.days[3])
-                .append("thursday", sign.days[4])
-                .append("friday", sign.days[5])
-                .append("saturday", sign.days[6])
+                .append("days", new Document("sunday", sign.days[0])
+                        .append("monday", sign.days[1])
+                        .append("tuesday", sign.days[2])
+                        .append("wednesday", sign.days[3])
+                        .append("thursday", sign.days[4])
+                        .append("friday", sign.days[5])
+                        .append("saturday", sign.days[6]))
                 .append("dateFrom", sign.dateFrom)
                 .append("dateTo", sign.dateTo);
         collection.insertOne(doc);
     }
-    
+
     public String getDataSourcePath() {
         return dataSourceAbsPath;
     }

@@ -19,11 +19,14 @@ public class CitySign {
     String longitude;
     String city;
     String type;
+    String icon;
     boolean typeAlways;
-    boolean typeDirection;
+    boolean leftDirection;
+    boolean rightDirection;
     String timeFrom;
     String timeTo;
     String maxTime;
+    boolean allDays;
     boolean[] days = new boolean[7]; // Monday to Sunday
     String dateFrom;
     String dateTo;

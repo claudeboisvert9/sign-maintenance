@@ -13,7 +13,13 @@ import com.mongodb.Block;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.result.DeleteResult;
 import static com.mongodb.client.model.Updates.*;
@@ -32,6 +38,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import javax.swing.*;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -229,9 +236,13 @@ public class DataIO {
             //use sign.setFieldname()?
             System.out.println(myDoc.toJson());
             sign.type = myDoc.getString("signType");
+            sign.icon = myDoc.getString("icon");
             sign.typeAlways = myDoc.getBoolean("typeAlways");
-            sign.typeDirection = myDoc.getBoolean("typeDirection");
+            sign.leftDirection = myDoc.getBoolean("leftDirection");
+            sign.rightDirection = myDoc.getBoolean("rightDirection");
             sign.city = myDoc.getString("city");
+            sign.allDays = myDoc.getBoolean("allDays");
+
             Document daysDoc = (Document) myDoc.get("days");
             sign.days[0] = daysDoc.getBoolean("sunday");
             sign.days[1] = daysDoc.getBoolean("monday");
@@ -239,7 +250,8 @@ public class DataIO {
             sign.days[3] = daysDoc.getBoolean("wednesday");
             sign.days[4] = daysDoc.getBoolean("thursday");
             sign.days[5] = daysDoc.getBoolean("friday");
-            sign.days[6] = daysDoc.getBoolean("saturday");           
+            sign.days[6] = daysDoc.getBoolean("saturday");
+
             sign.timeFrom = myDoc.getString("timeFrom");
             sign.timeTo = myDoc.getString("timeTo");
             sign.maxTime = myDoc.getString("maxTime");
@@ -252,8 +264,38 @@ public class DataIO {
 
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
+        String docKey = fileNumber + "_" + latitude + "_" + longitude;
+ 
+        BasicDBObject newDocument = new BasicDBObject();
+        newDocument.put("Key", docKey);
+        newDocument.put("city", sign.city);
+        newDocument.put("signType", sign.type);
+        newDocument.put("icon", sign.icon);
+        newDocument.put("typeAlways", sign.typeAlways);
+        newDocument.put("leftDirection", sign.leftDirection);
+        newDocument.put("rightDirection", sign.rightDirection);
+        newDocument.put("allDays", sign.allDays);
 
-        Document doc = new Document("Key", fileNumber + "_" + latitude + "_" + longitude)
+        BasicDBObject daysSubDoc = new BasicDBObject();
+        daysSubDoc.put("sunday", sign.days[0]);
+        daysSubDoc.put("monday", sign.days[1]);
+        daysSubDoc.put("tuesday", sign.days[2]);
+        daysSubDoc.put("wednesday", sign.days[3]);
+        daysSubDoc.put("thursday", sign.days[4]);
+        daysSubDoc.put("friday", sign.days[5]);
+        daysSubDoc.put("saturday", sign.days[6]);
+        newDocument.put("days", daysSubDoc);
+
+        newDocument.put("timeFrom", sign.timeFrom);
+        newDocument.put("timeTo", sign.timeTo);
+        newDocument.put("maxTime", sign.maxTime);
+        newDocument.put("dateFrom", sign.dateFrom);
+        newDocument.put("dateTo", sign.dateTo);
+
+        Bson filter = Filters.eq("Key", docKey);
+        collection.updateOne(filter, newDocument); //test return value. results..
+/*         
+        Document doc = new Document("Key", docKey)
                 .append("signType", sign.type)
                 .append("city", sign.city)
                 .append("typeAlways", sign.typeAlways)
@@ -271,6 +313,7 @@ public class DataIO {
                 .append("dateFrom", sign.dateFrom)
                 .append("dateTo", sign.dateTo);
         collection.insertOne(doc);
+         */
     }
 
     public String getDataSourcePath() {

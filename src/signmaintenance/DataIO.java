@@ -233,7 +233,7 @@ public class DataIO {
         if (myDoc != null) {
             //use sign.setFieldname()?
             System.out.println(myDoc.toJson());
-            sign.mongoId = myDoc.getString("_Id");
+            sign.mongoId = myDoc.get("_id").toString();
             sign.type = myDoc.getString("signType");
             sign.icon = myDoc.getString("icon");
             sign.typeAlways = myDoc.getBoolean("typeAlways");
@@ -265,10 +265,11 @@ public class DataIO {
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
         String docKey = fileNumber + "_" + latitude + "_" + longitude;
-        //TODO use _id to delete  
-        //collection.deleteOne(new Document("_Id", sign.mongoId)); //prevent duplicates
-        collection.deleteOne(new Document("Key", docKey)); //prevent duplicates
-// TODO use .replace not deleteOne        
+        //TODO use _id to delete
+        //collection.deleteOne(new Document("_id", new ObjectId(sign.mongoId))); //prevent duplicates
+        //collection.deleteOne(new Document("Key", docKey)); //prevent duplicates        
+        // TODO use .replace not deleteOne 
+        
         Document doc = new Document("Key", docKey)
                 .append("signType", sign.type)
                 .append("city", sign.city)

@@ -85,7 +85,6 @@ public class FormGUI extends javax.swing.JFrame {
         dateFromPicker = new com.github.lgooddatepicker.components.DatePicker();
         dateToPicker = new com.github.lgooddatepicker.components.DatePicker();
         maxTimePicker = new com.github.lgooddatepicker.components.TimePicker();
-        daysPanel = new javax.swing.JPanel();
         timeFromPicker = new com.github.lgooddatepicker.components.TimePicker();
         timeToPicker = new com.github.lgooddatepicker.components.TimePicker();
         typeAlwaysCBox = new javax.swing.JCheckBox();
@@ -99,6 +98,7 @@ public class FormGUI extends javax.swing.JFrame {
         dayThursdayCBox = new javax.swing.JCheckBox();
         daySaturdayCBox = new javax.swing.JCheckBox();
         daySundayCBox = new javax.swing.JCheckBox();
+        copyPreviousBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sign Maintenance");
@@ -180,27 +180,9 @@ public class FormGUI extends javax.swing.JFrame {
 
         dateToLbl.setText("To:");
 
-        javax.swing.GroupLayout daysPanelLayout = new javax.swing.GroupLayout(daysPanel);
-        daysPanel.setLayout(daysPanelLayout);
-        daysPanelLayout.setHorizontalGroup(
-            daysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
-        );
-        daysPanelLayout.setVerticalGroup(
-            daysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 159, Short.MAX_VALUE)
-        );
-
         timeFromPicker.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 timeFromPickerMouseExited(evt);
-            }
-        });
-        timeFromPicker.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                timeFromPickerCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         timeFromPicker.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -209,34 +191,11 @@ public class FormGUI extends javax.swing.JFrame {
             }
         });
 
-        timeToPicker.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                timeToPickerCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-
         typeAlwaysCBox.setText("Always");
-        typeAlwaysCBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeAlwaysCBoxActionPerformed(evt);
-            }
-        });
 
         leftDirectionCBox.setText("Left Direction");
-        leftDirectionCBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leftDirectionCBoxActionPerformed(evt);
-            }
-        });
 
         rightDirectionCBox.setText("Right Direction");
-        rightDirectionCBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightDirectionCBoxActionPerformed(evt);
-            }
-        });
 
         allDaysCBox.setText("All Days");
         allDaysCBox.addActionListener(new java.awt.event.ActionListener() {
@@ -298,14 +257,20 @@ public class FormGUI extends javax.swing.JFrame {
             }
         });
 
+        copyPreviousBtn.setText("Copy Previous");
+        copyPreviousBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyPreviousBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -318,14 +283,6 @@ public class FormGUI extends javax.swing.JFrame {
                                     .addComponent(longitudeTField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(picNoTField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                     .addComponent(latitudeTField, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dateFromLbl)
-                                    .addComponent(dateToLbl))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateToPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateFromPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(timeFromLbl)
@@ -359,9 +316,7 @@ public class FormGUI extends javax.swing.JFrame {
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(daySundayCBox)
                                                         .addComponent(daySaturdayCBox))))
-                                            .addComponent(allDaysCBox))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(daysPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(allDaysCBox)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(SignTypeLbl)
                                         .addGap(18, 18, 18)
@@ -369,24 +324,32 @@ public class FormGUI extends javax.swing.JFrame {
                                             .addComponent(signTypeCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(typeAlwaysCBox)
                                             .addComponent(leftDirectionCBox)
-                                            .addComponent(rightDirectionCBox))))))
-                        .addGap(18, 18, 18)
-                        .addComponent(imageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
+                                            .addComponent(rightDirectionCBox)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dateFromLbl)
+                                    .addComponent(dateToLbl))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateToPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateFromPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(70, 70, 70)
+                        .addComponent(imageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(previousBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(nextBtn)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exitBtn)
-                .addGap(34, 34, 34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(copyPreviousBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(exitBtn)))
+                .addGap(10, 10, 10))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {nextBtn, previousBtn});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {copyPreviousBtn, nextBtn, previousBtn});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {dayFridayCBox, dayMondayCBox, daySaturdayCBox, daySundayCBox, dayThursdayCBox, dayTuesdayCBox, dayWednesdayCBox});
 
@@ -395,14 +358,11 @@ public class FormGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pictureNoLbl)
+                    .addComponent(picNoTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(imageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pictureNoLbl)
-                            .addComponent(picNoTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(latitudeLbl)
                             .addComponent(latitudeTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -420,53 +380,53 @@ public class FormGUI extends javax.swing.JFrame {
                         .addComponent(leftDirectionCBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rightDirectionCBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
+                        .addGap(18, 30, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(allDaysCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(daysLbl))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dayTuesdayCBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(allDaysCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(daysLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dayTuesdayCBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(daySaturdayCBox)
-                                            .addComponent(dayMondayCBox))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(daySundayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(3, 3, 3)
-                                .addComponent(dayWednesdayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayThursdayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayFridayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(daysPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(daySaturdayCBox)
+                                    .addComponent(dayMondayCBox))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(daySundayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(3, 3, 3)
+                        .addComponent(dayWednesdayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dayThursdayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dayFridayCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(timeFromLbl)
                             .addComponent(timeToLbl)
                             .addComponent(timeFromPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(timeToPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(maxTimeLbl)
                             .addComponent(maxTimePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dateFromLbl)
                             .addComponent(dateFromPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dateToLbl)
                             .addComponent(dateToPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)))
+                        .addGap(64, 64, 64))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn)
                     .addComponent(exitBtn)
                     .addComponent(previousBtn)
-                    .addComponent(nextBtn))
+                    .addComponent(nextBtn)
+                    .addComponent(copyPreviousBtn))
                 .addGap(43, 43, 43))
         );
 
@@ -503,9 +463,7 @@ public class FormGUI extends javax.swing.JFrame {
         // check if exist in mongo
         mongoDocExist = io.getMongoDoc(sign);
         if (mongoDocExist) {
-            
             signTypeCBox.setSelectedItem(sign.type);
-            // update regular screen fields
             typeAlwaysCBox.setSelected(sign.typeAlways);
             leftDirectionCBox.setSelected(sign.leftDirection);
             rightDirectionCBox.setSelected(sign.rightDirection);
@@ -522,7 +480,7 @@ public class FormGUI extends javax.swing.JFrame {
             maxTimePicker.setText(sign.maxTime);
             dateFromPicker.setText(sign.dateFrom);
             dateToPicker.setText(sign.dateTo);
-        } else { // init screen fields
+        } else { // reset screen fields
             signTypeCBox.setSelectedItem("No Parking");
             typeAlwaysCBox.setSelected(false);
             leftDirectionCBox.setSelected(false);
@@ -537,7 +495,7 @@ public class FormGUI extends javax.swing.JFrame {
             daySaturdayCBox.setSelected(false);
             timeFromPicker.setText("");
             timeToPicker.setText("");
-            maxTimePicker.setText(sign.maxTime);
+            maxTimePicker.setText("");
             dateFromPicker.setText("");
             dateToPicker.setText("");  
         }
@@ -700,12 +658,6 @@ public class FormGUI extends javax.swing.JFrame {
         sign.type = signTypeCBox.getSelectedItem().toString();
     }//GEN-LAST:event_signTypeCBoxCaretPositionChanged
 
-    private void timeFromPickerCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_timeFromPickerCaretPositionChanged
-        // TODO add your handling code here:
-        //.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        sign.timeFrom = timeFromPicker.getText();
-    }//GEN-LAST:event_timeFromPickerCaretPositionChanged
-
     private void timeFromPickerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_timeFromPickerMouseExited
         // TODO add your handling code here:
         //sign.timeFrom = timeFromPicker.toString();
@@ -716,30 +668,17 @@ public class FormGUI extends javax.swing.JFrame {
         //sign.timeFrom = timeFromPicker.toString();
     }//GEN-LAST:event_timeFromPickerPropertyChange
 
-    private void timeToPickerCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_timeToPickerCaretPositionChanged
-        // TODO add your handling code here:
-        sign.timeTo = timeToPicker.getText();
-    }//GEN-LAST:event_timeToPickerCaretPositionChanged
-
-    private void typeAlwaysCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeAlwaysCBoxActionPerformed
-        sign.typeAlways = typeAlwaysCBox.isSelected();
-    }//GEN-LAST:event_typeAlwaysCBoxActionPerformed
-
     private void dayMondayCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayMondayCBoxActionPerformed
         sign.days[1] = dayMondayCBox.isSelected();
     }//GEN-LAST:event_dayMondayCBoxActionPerformed
 
-    private void leftDirectionCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftDirectionCBoxActionPerformed
-        sign.leftDirection = leftDirectionCBox.isSelected();
-    }//GEN-LAST:event_leftDirectionCBoxActionPerformed
-
-    private void rightDirectionCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightDirectionCBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rightDirectionCBoxActionPerformed
-
     private void allDaysCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allDaysCBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_allDaysCBoxActionPerformed
+
+    private void copyPreviousBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyPreviousBtnActionPerformed
+        //Need copy of previous sign object
+    }//GEN-LAST:event_copyPreviousBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -788,6 +727,7 @@ public class FormGUI extends javax.swing.JFrame {
     private javax.swing.JLabel SignTypeLbl;
     private javax.swing.JCheckBox allDaysCBox;
     private com.github.lgooddatepicker.components.CalendarPanel calendarPanel1;
+    private javax.swing.JButton copyPreviousBtn;
     private javax.swing.JLabel dateFromLbl;
     private com.github.lgooddatepicker.components.DatePicker dateFromPicker;
     private javax.swing.JLabel dateToLbl;
@@ -800,7 +740,6 @@ public class FormGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox dayTuesdayCBox;
     private javax.swing.JCheckBox dayWednesdayCBox;
     private javax.swing.JLabel daysLbl;
-    private javax.swing.JPanel daysPanel;
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JLabel latitudeLbl;

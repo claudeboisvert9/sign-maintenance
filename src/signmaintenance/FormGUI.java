@@ -24,9 +24,9 @@ import javax.swing.JFileChooser;
  */
 public class FormGUI extends javax.swing.JFrame {
 
+    public CitySign sign;
     public DataIO io;
     public static File[] dirFiles;
-    public CitySign sign;
     public boolean mongoDocExist;
 
     String dataSourceAbsPath;
@@ -47,10 +47,10 @@ public class FormGUI extends javax.swing.JFrame {
         dataSourceAbsPath = io.getDataSourcePath();
         imagesAbsPath = dataSourceAbsPath + "\\images";
         locationsAbsPath = dataSourceAbsPath + "\\location";
-        if (dirFiles.length > 0) {
+        if (dirFiles.length > 0) { //there are files to process
             io.openDB();
-        } //files selected
-        nextBtn.doClick();
+            nextBtn.doClick();
+        } //TODO else message to user      
     }
 
     /**
@@ -495,6 +495,7 @@ public class FormGUI extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         // update screen for mongo Key Fields
         picNoTField.setText(sign.pf.fileNo);
         latitudeTField.setText(sign.latitude);
@@ -502,6 +503,7 @@ public class FormGUI extends javax.swing.JFrame {
         // check if exist in mongo
         mongoDocExist = io.getMongoDoc(sign);
         if (mongoDocExist) {
+            
             signTypeCBox.setSelectedItem(sign.type);
             // update regular screen fields
             typeAlwaysCBox.setSelected(sign.typeAlways);
@@ -517,8 +519,27 @@ public class FormGUI extends javax.swing.JFrame {
             daySaturdayCBox.setSelected(sign.days[6]);
             timeFromPicker.setText(sign.timeFrom);
             timeToPicker.setText(sign.timeTo);
+            maxTimePicker.setText(sign.maxTime);
             dateFromPicker.setText(sign.dateFrom);
             dateToPicker.setText(sign.dateTo);
+        } else { // init screen fields
+            signTypeCBox.setSelectedItem("No Parking");
+            typeAlwaysCBox.setSelected(false);
+            leftDirectionCBox.setSelected(false);
+            rightDirectionCBox.setSelected(false);
+            allDaysCBox.setSelected(false);
+            daySundayCBox.setSelected(false);
+            dayMondayCBox.setSelected(false);
+            dayTuesdayCBox.setSelected(false);
+            dayWednesdayCBox.setSelected(false);
+            dayThursdayCBox.setSelected(false);
+            dayFridayCBox.setSelected(false);
+            daySaturdayCBox.setSelected(false);
+            timeFromPicker.setText("");
+            timeToPicker.setText("");
+            maxTimePicker.setText(sign.maxTime);
+            dateFromPicker.setText("");
+            dateToPicker.setText("");  
         }
     }
 
@@ -545,53 +566,54 @@ public class FormGUI extends javax.swing.JFrame {
         // validate fields
         // determine icon
         String signIcon = null;
+        sign.type = signTypeCBox.getSelectedItem().toString();
         switch (sign.type) {
-            case "NoParking":
+            case "No Parking":
                 if (sign.typeAlways) {
-                    signIcon = "images/NoParkingAlways.png";
+                    signIcon = "NoParkingAlways.png";
                     if (sign.leftDirection) {
-                        signIcon = "images/NoParkingLeftDirection.png";
+                        signIcon = "NoParkingLeftDirection.png";
                     }
                     if (sign.rightDirection) {
-                        signIcon = "images/NoParkingRightDirection.png";
+                        signIcon = "NoParkingRightDirection.png";
                     }
                     if (sign.rightDirection && sign.leftDirection) {
-                        signIcon = "images/NoParkingBothDirection.png";
+                        signIcon = "NoParkingBothDirection.png";
                     }
                 } else {
-                    signIcon = "images/NoParkingTimeRestriction.png";
+                    signIcon = "NoParkingTimeRestriction.png";
                 }
                 break;
-            case "NoStopping":
+            case "No Stopping":
                 if (sign.typeAlways) {
-                    signIcon = "images/NoStoppingAlways.png";
+                    signIcon = "NoStoppingAlways.png";
                     if (sign.leftDirection) {
-                        signIcon = "images/NoStoppingLeftDirection.png";
+                        signIcon = "NoStoppingLeftDirection.png";
                     }
                     if (sign.rightDirection) {
-                        signIcon = "images/NoStoppingRightDirection.png";
+                        signIcon = "NoStoppingRightDirection.png";
                     }
                     if (sign.rightDirection && sign.leftDirection) {
-                        signIcon = "images/NoStoppingBothDirection.png";
+                        signIcon = "NoStoppingBothDirection.png";
                     }
                 } else {
-                    signIcon = "images/NoStoppingTimeRestriction.png";
+                    signIcon = "NoStoppingTimeRestriction.png";
                 }
                 break;
             case "Parking":
                 if (sign.typeAlways) {
-                    signIcon = "images/ParkingAlways.png";
+                    signIcon = "ParkingAlways.png";
                     if (sign.leftDirection) {
-                        signIcon = "images/ParkingLeftDirection.png";
+                        signIcon = "ParkingLeftDirection.png";
                     }
                     if (sign.rightDirection) {
-                        signIcon = "images/ParkingRightDirection.png";
+                        signIcon = "ParkingRightDirection.png";
                     }
                     if (sign.rightDirection && sign.leftDirection) {
-                        signIcon = "images/ParkingBothDirection.png";
+                        signIcon = "ParkingBothDirection.png";
                     }
                 } else {
-                    signIcon = "images/ParkingTimeRestriction.png";
+                    signIcon = "ParkingTimeRestriction.png";
                 }
                 break;
             default:
@@ -600,7 +622,6 @@ public class FormGUI extends javax.swing.JFrame {
         } //switch
 
         // set Sign data
-        sign.type = signTypeCBox.getSelectedItem().toString(); //set default value 
         sign.icon = signIcon;
         sign.typeAlways = typeAlwaysCBox.isSelected();
         sign.leftDirection = leftDirectionCBox.isSelected();
@@ -620,11 +641,11 @@ public class FormGUI extends javax.swing.JFrame {
         sign.dateTo = dateToPicker.getDateStringOrEmptyString();
 
         // Save mongo document
-        if (mongoDocExist) {
+        //if (mongoDocExist) {
             //io.insertToMongo(sign);
-        } else {
+        //} else {
             io.saveToMongo(sign);
-        }
+        //}
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void nextBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextBtnActionPerformed

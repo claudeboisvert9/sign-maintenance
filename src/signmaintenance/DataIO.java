@@ -17,10 +17,12 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.WriteResult;
 
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.*;
+import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.DeleteResult;
 import static com.mongodb.client.model.Updates.*;
 import com.mongodb.client.result.UpdateResult;
@@ -119,10 +121,6 @@ public class DataIO {
     }
 
     public File[] getImgFiles() {
-
-        // Set data directories to process
-        //imgRelPathText = REL_PATH_TEXT + "\\images";
-        //locRelPathText = REL_PATH_TEXT + "\\location";
         selectSourceDir();
         File path = new File(imagesAbsPath);
         files = path.listFiles();
@@ -218,7 +216,7 @@ public class DataIO {
         sign.setlatitude(latitude);
         sign.setlongitude(longitude);
 
-        //getMongoDoc();
+        //getMongoDoc(sign);
         // si type not null set type previous type
         // set default fields or set to empty
         // Close fileS
@@ -235,6 +233,7 @@ public class DataIO {
         if (myDoc != null) {
             //use sign.setFieldname()?
             System.out.println(myDoc.toJson());
+            sign.mongoId = myDoc.getString("_Id");
             sign.type = myDoc.getString("signType");
             sign.icon = myDoc.getString("icon");
             sign.typeAlways = myDoc.getBoolean("typeAlways");
@@ -258,18 +257,47 @@ public class DataIO {
             sign.dateFrom = myDoc.getString("dateFrom");
             sign.dateTo = myDoc.getString("dateTo");
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
         String docKey = fileNumber + "_" + latitude + "_" + longitude;
- 
+        //TODO use _id to delete  
+        //collection.deleteOne(new Document("_Id", sign.mongoId)); //prevent duplicates
+        collection.deleteOne(new Document("Key", docKey)); //prevent duplicates
+// TODO use .replace not deleteOne        
+        Document doc = new Document("Key", docKey)
+                .append("signType", sign.type)
+                .append("city", sign.city)
+                .append("icon", sign.icon)
+                .append("typeAlways", sign.typeAlways)
+                .append("leftDirection", sign.leftDirection)
+                .append("rightDirection", sign.leftDirection)
+                .append("allDays", sign.allDays)
+                .append("days", new Document("sunday", sign.days[0])
+                        .append("monday", sign.days[1])
+                        .append("tuesday", sign.days[2])
+                        .append("wednesday", sign.days[3])
+                        .append("thursday", sign.days[4])
+                        .append("friday", sign.days[5])
+                        .append("saturday", sign.days[6]))
+                .append("timeFrom", sign.timeFrom)
+                .append("timeTo", sign.timeTo)
+                .append("maxTime", sign.maxTime)
+                .append("dateFrom", sign.dateFrom)
+                .append("dateTo", sign.dateTo);
+        collection.insertOne(doc);
+    }
+
+    // update does not work...
+    private void updateMongo() {
         BasicDBObject newDocument = new BasicDBObject();
-        newDocument.put("Key", docKey);
-        newDocument.put("city", sign.city);
+        //newDocument.put("Key", docKey);
         newDocument.put("signType", sign.type);
+        newDocument.put("city", sign.city);
         newDocument.put("icon", sign.icon);
         newDocument.put("typeAlways", sign.typeAlways);
         newDocument.put("leftDirection", sign.leftDirection);
@@ -292,28 +320,9 @@ public class DataIO {
         newDocument.put("dateFrom", sign.dateFrom);
         newDocument.put("dateTo", sign.dateTo);
 
-        Bson filter = Filters.eq("Key", docKey);
-        collection.updateOne(filter, newDocument); //test return value. results..
-/*         
-        Document doc = new Document("Key", docKey)
-                .append("signType", sign.type)
-                .append("city", sign.city)
-                .append("typeAlways", sign.typeAlways)
-                .append("typeDirection", sign.typeDirection)
-                .append("timeFrom", sign.timeFrom)
-                .append("timeTo", sign.timeTo)
-                .append("maxTime", sign.maxTime)
-                .append("days", new Document("sunday", sign.days[0])
-                        .append("monday", sign.days[1])
-                        .append("tuesday", sign.days[2])
-                        .append("wednesday", sign.days[3])
-                        .append("thursday", sign.days[4])
-                        .append("friday", sign.days[5])
-                        .append("saturday", sign.days[6]))
-                .append("dateFrom", sign.dateFrom)
-                .append("dateTo", sign.dateTo);
-        collection.insertOne(doc);
-         */
+        //Bson filter = Filters.eq("Key", docKey);
+        //UpdateOptions options = new UpdateOptions().upsert(true);
+        //UpdateResult c1 = collection.updateOne(filter, newDocument, options);
     }
 
     public String getDataSourcePath() {

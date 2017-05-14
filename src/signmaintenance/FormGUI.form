@@ -31,133 +31,166 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="pictureNoLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="latitudeLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="longitudeLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="longitudeTField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="picNoTField" alignment="0" pref="94" max="32767" attributes="0"/>
-                                  <Component id="latitudeTField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="timeFromLbl" min="-2" max="-2" attributes="0"/>
-                                  <Component id="maxTimeLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="timeFromPicker" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="timeToLbl" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="timeToPicker" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="maxTimePicker" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="daysLbl" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dayFridayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dayWednesdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="dayThursdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="dayMondayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="dayTuesdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="daySundayCBox" linkSize="5" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="daySaturdayCBox" linkSize="5" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Component id="allDaysCBox" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="SignTypeLbl" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="signTypeCBox" min="-2" pref="135" max="-2" attributes="0"/>
-                                          <Component id="typeAlwaysCBox" min="-2" max="-2" attributes="0"/>
-                                          <Component id="leftDirectionCBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rightDirectionCBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="dateFromLbl" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dateToLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="dateToPicker" min="-2" max="-2" attributes="0"/>
-                                  <Component id="dateFromPicker" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Component id="imageLbl" min="-2" pref="338" max="-2" attributes="0"/>
+                  <Component id="latitudeLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="pictureNoLbl" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="picNoTField" max="32767" attributes="0"/>
+                  <Component id="latitudeTField" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="signNoTField" min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="419" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="previousBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="nextBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="copyPreviousBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="saveBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="exitBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="longitudeLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="longitudeTField" min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="imageLbl" pref="295" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="daysLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="dayFridayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="dayWednesdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="dayThursdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="dayMondayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dayTuesdayCBox" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="daySundayCBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="daySaturdayCBox" linkSize="5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Component id="allDaysCBox" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="SignTypeLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="signTypeCBox" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="typeAlwaysCBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="leftDirectionCBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rightDirectionCBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="maxTimeLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="maxTimePicker" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="dateFromLbl" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateToLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="dateToPicker" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateFromPicker" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="timeFromLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="timeFromPicker3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="timeToPicker3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="timeFromPicker" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="timeToLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="timeToPicker" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="timeFromPicker2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="timeToPicker2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="previousBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="nextBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="newSignBtn" linkSize="1" min="-2" pref="94" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="copyPreviousBtn" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="68" max="32767" attributes="0"/>
+              <Component id="saveBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="exitBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pictureNoLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="picNoTField" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="latitudeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="latitudeTField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pictureNoLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="picNoTField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="imageLbl" min="-2" pref="493" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="latitudeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="latitudeTField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="signNoTField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="longitudeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="longitudeTField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="SignTypeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="signTypeCBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -168,7 +201,7 @@
                       <Component id="leftDirectionCBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="rightDirectionCBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="allDaysCBox" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
                           <Component id="daysLbl" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -192,13 +225,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dayFridayCBox" linkSize="3" min="-2" pref="15" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="timeFromLbl" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="timeToLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="timeFromPicker" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="timeToPicker" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="timeFromLbl" linkSize="4" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="timeToLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="timeFromPicker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="timeToPicker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="timeFromPicker2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="timeToPicker2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="timeFromPicker3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="timeToPicker3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="maxTimeLbl" linkSize="4" min="-2" max="-2" attributes="0"/>
                           <Component id="maxTimePicker" linkSize="4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -213,11 +260,7 @@
                           <Component id="dateToLbl" min="-2" max="-2" attributes="0"/>
                           <Component id="dateToPicker" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="imageLbl" min="-2" pref="493" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -226,8 +269,9 @@
                   <Component id="previousBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nextBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="copyPreviousBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="newSignBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -238,7 +282,6 @@
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="exitBtnMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtnActionPerformed"/>
       </Events>
     </Component>
@@ -268,21 +311,26 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="latitudeTField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="longitudeTField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="saveBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="saveBtnMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveBtnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="pictureNoLbl">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Picture Nb:"/>
+        <Property name="text" type="java.lang.String" value="File:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="latitudeLbl">
@@ -295,7 +343,6 @@
         <Property name="text" type="java.lang.String" value="Next"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextBtnMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextBtnActionPerformed"/>
       </Events>
     </Component>
@@ -356,10 +403,6 @@
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="maxTimePicker">
     </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFromPicker">
-      <Events>
-        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="timeFromPickerMouseExited"/>
-        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="timeFromPickerPropertyChange"/>
-      </Events>
     </Component>
     <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeToPicker">
     </Component>
@@ -390,17 +433,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Monday"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayMondayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="dayTuesdayCBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tuesday"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayTuesdayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="dayWednesdayCBox">
       <Properties>
@@ -412,17 +449,11 @@
           <Dimension value="[67, 23]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayWednesdayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="dayFridayCBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Friday"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayFridayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="dayThursdayCBox">
       <Properties>
@@ -434,25 +465,16 @@
           <Dimension value="[67, 23]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayThursdayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="daySaturdayCBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Saturday"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daySaturdayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="daySundayCBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sunday"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daySundayCBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="copyPreviousBtn">
       <Properties>
@@ -460,6 +482,32 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyPreviousBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sign No:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="signNoTField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFromPicker2">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeToPicker2">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeFromPicker3">
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.TimePicker" name="timeToPicker3">
+    </Component>
+    <Component class="javax.swing.JButton" name="newSignBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="New Sign"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newSignBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

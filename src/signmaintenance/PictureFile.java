@@ -14,6 +14,7 @@ public class PictureFile {
     public String fileName;
     public String fileType;
     public String fileNo;
+    public Integer signNo; //allows multiple signs per picture file
     public String fileDate;
     //private int fileSize;
     //public String[] latitude;
@@ -22,17 +23,26 @@ public class PictureFile {
     public String longitude;
 
     public void setfileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getfileName() {
-		return fileName;
-	}
-	
+        this.fileName = fileName;
+    }
+
+    public String getfileName() {
+        return fileName;
+    }
+
     public void setfileNo(String fileNo) {
-		this.fileNo = fileNo;
-	}
-	public String getfileNo() {
-		return fileNo;
-	}
-	
+        this.fileNo = fileNo;
+    }
+
+    public String getfileNo() {
+        return fileNo;
+    }
+
+    public void setsignNo(int signNo) {
+        this.signNo = signNo;
+    }
+
+    public int getsignNo() {
+        return signNo;
+    }   
 }

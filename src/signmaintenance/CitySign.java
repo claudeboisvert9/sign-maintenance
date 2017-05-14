@@ -14,12 +14,14 @@ import org.bson.types.ObjectId;
  *
  * @author User
  */
-public class CitySign {
+public class CitySign implements Cloneable {
 
-    // Document KEY fields with pf.fileNo
+    //Document KEY fields with pf.fileNo
     String mongoId;
     String latitude;
     String longitude;
+    //Integer signNo in pf
+	
     String city;
     String type;
     String icon;
@@ -27,9 +29,13 @@ public class CitySign {
     boolean leftDirection;
     boolean rightDirection;
     boolean allDays;
-    boolean[] days = new boolean[7]; // Monday to Sunday
+    boolean[] days = new boolean[7]; // Sunday to Saturday 
     String timeFrom;
     String timeTo;
+    String timeFrom2;
+    String timeTo2;
+    String timeFrom3;
+    String timeTo3;
     String maxTime;
     String dateFrom;
     String dateTo;
@@ -40,6 +46,21 @@ public class CitySign {
 //    public void CitySign() {
 //        pf = new PictureFile();
 //    }
+    @Override
+    public CitySign clone() {
+        CitySign copy = null;
+        try {
+            // On récupère l'instance à renvoyer par l'appel de la 
+            // méthode super.clone()
+            copy = (CitySign) super.clone();
+        } catch (CloneNotSupportedException cnse) {
+            // Ne devrait jamais arriver car nous implémentons 
+            // l'interface Cloneable
+            cnse.printStackTrace(System.err);
+        }
+        // on renvoie le clone
+        return copy;
+    }
 
     public void settype(String type) {
         this.type = type;

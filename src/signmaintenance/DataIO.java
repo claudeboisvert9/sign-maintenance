@@ -41,6 +41,7 @@ import javax.imageio.ImageIO;
 
 import javax.swing.*;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -62,6 +63,7 @@ public class DataIO {
     public CitySign sign;
     public String fileName;
     public String fileNumber;
+    public int signNo;
     public String latitude;
     public String longitude;
 
@@ -81,7 +83,6 @@ public class DataIO {
     }
 
     public static void openDB() {
-
         try {
             // Directly connect to a single MongoDB server
             // (this will not auto-discover the primary even if it's a member of a replica set)
@@ -114,7 +115,6 @@ public class DataIO {
             dataSourceAbsPath = chooser.getSelectedFile().toString();
             imagesAbsPath = dataSourceAbsPath + "\\images";
             locationsAbsPath = dataSourceAbsPath + "\\location";
-
         } else {
             System.out.println("No Selection ");
         }
@@ -182,7 +182,6 @@ public class DataIO {
     public CitySign getImageInfo(String srcImgFileName) {
 
         System.out.println("Processing file: " + srcImgFileName);
-
         // Set location file name (signLocation123) then read
         String locationFileName = "signLocation";
         fileNumber = srcImgFileName.replaceAll("\\D+", "");
@@ -213,6 +212,7 @@ public class DataIO {
         sign = new CitySign();
         sign.pf.setfileName(fileName);
         sign.pf.setfileNo(fileNumber);
+        sign.pf.setsignNo(1);
         sign.setlatitude(latitude);
         sign.setlongitude(longitude);
 
@@ -227,7 +227,7 @@ public class DataIO {
     public boolean getMongoDoc(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
 
-        String docKey = fileNumber + "_" + latitude + "_" + longitude;
+        String docKey = fileNumber +"_"+ String.valueOf(sign.pf.signNo) +"_"+ latitude +"_"+ longitude;
         Document myDoc = collection.find(eq("Key", docKey)).first();
 
         if (myDoc != null) {
@@ -253,9 +253,15 @@ public class DataIO {
 
             sign.timeFrom = myDoc.getString("timeFrom");
             sign.timeTo = myDoc.getString("timeTo");
+            sign.timeFrom2 = myDoc.getString("timeFrom2");
+            sign.timeTo2 = myDoc.getString("timeTo2");
+            sign.timeFrom3 = myDoc.getString("timeFrom3");
+            sign.timeTo3 = myDoc.getString("timeTo3");
             sign.maxTime = myDoc.getString("maxTime");
             sign.dateFrom = myDoc.getString("dateFrom");
             sign.dateTo = myDoc.getString("dateTo");
+
+            sign.pf.setsignNo(signNo);
             return true;
         } else {
             return false;
@@ -264,19 +270,19 @@ public class DataIO {
 
     public void saveToMongo(CitySign sign) {
         MongoCollection<Document> collection = database.getCollection("signs");
-        String docKey = fileNumber + "_" + latitude + "_" + longitude;
+        String docKey = fileNumber + "_" + String.valueOf(sign.pf.signNo) + "_" + latitude + "_" + longitude;
         //TODO use _id to delete
         //collection.deleteOne(new Document("_id", new ObjectId(sign.mongoId))); //prevent duplicates
-        //collection.deleteOne(new Document("Key", docKey)); //prevent duplicates        
+        collection.deleteOne(new Document("Key", docKey)); //prevent duplicates        
         // TODO use .replace not deleteOne 
-        
+
         Document doc = new Document("Key", docKey)
                 .append("signType", sign.type)
                 .append("city", sign.city)
                 .append("icon", sign.icon)
                 .append("typeAlways", sign.typeAlways)
                 .append("leftDirection", sign.leftDirection)
-                .append("rightDirection", sign.leftDirection)
+                .append("rightDirection", sign.rightDirection)
                 .append("allDays", sign.allDays)
                 .append("days", new Document("sunday", sign.days[0])
                         .append("monday", sign.days[1])
@@ -287,13 +293,21 @@ public class DataIO {
                         .append("saturday", sign.days[6]))
                 .append("timeFrom", sign.timeFrom)
                 .append("timeTo", sign.timeTo)
+                .append("timeFrom2", sign.timeFrom2)
+                .append("timeTo2", sign.timeTo2)
+                .append("timeFrom3", sign.timeFrom3)
+                .append("timeTo3", sign.timeTo3)
                 .append("maxTime", sign.maxTime)
                 .append("dateFrom", sign.dateFrom)
                 .append("dateTo", sign.dateTo);
         collection.insertOne(doc);
     }
 
-    // update does not work...
+    public String getDataSourcePath() {
+        return dataSourceAbsPath;
+    }
+    
+    /*    // update does not work...
     private void updateMongo() {
         BasicDBObject newDocument = new BasicDBObject();
         //newDocument.put("Key", docKey);
@@ -325,8 +339,5 @@ public class DataIO {
         //UpdateOptions options = new UpdateOptions().upsert(true);
         //UpdateResult c1 = collection.updateOne(filter, newDocument, options);
     }
-
-    public String getDataSourcePath() {
-        return dataSourceAbsPath;
-    }
+     */
 }
